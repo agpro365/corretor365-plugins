@@ -1,0 +1,14 @@
+{
+  "name": "corretor365",
+  "version": "1.0.0",
+  "description": "Use o corretor365 no Claude: o assistente lê os imóveis, o site e — se a imobiliária deixar — os leads, e manda sugestões que uma pessoa revisa e aplica no painel.",
+  "author": {
+    "name": "corretor365",
+    "email": "suporte@corretor365.com.br",
+    "url": "https://corretor365.com.br"
+  },
+  "homepage": "https://corretor365.com.br/claude-e-chatgpt",
+  "repository": "https://github.com/agpro365/corretor365-plugins",
+  "license": "MIT",
+  "keywords": ["imobiliária", "imóveis", "corretor de imóveis", "site imobiliário", "real estate", "brasil"]
+}

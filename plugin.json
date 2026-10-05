@@ -1,0 +1,101 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "corretor365",
+  "version": "1.0.0",
+  "description": "Use o corretor365 no ChatGPT: o assistente lê os imóveis, o site e — se a imobiliária deixar — os leads, e manda sugestões que uma pessoa revisa e aplica no painel.",
+  "author": {
+    "name": "corretor365",
+    "email": "suporte@corretor365.com.br",
+    "url": "https://corretor365.com.br"
+  },
+  "homepage": "https://corretor365.com.br/claude-e-chatgpt",
+  "repository": "https://github.com/agpro365/corretor365-plugins",
+  "license": "MIT",
+  "keywords": ["imobiliária", "imóveis", "corretor de imóveis", "site imobiliário", "real estate", "brasil"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "corretor365",
+        "shortDescription": "Real-estate listings and site",
+        "longDescription": "corretor365 is the platform Brazilian real-estate agencies use for their listings, website and customer service. Connected to ChatGPT, the assistant reads your agency's listings and website pages — and its leads, if the account owner allows it — and prepares improvements: clearer titles and descriptions, price adjustments, website copy and SEO, and new listings drafted from the owner's text.\n\nNothing changes on its own. Everything the assistant prepares arrives as a suggestion under Sugestões in the corretor365 panel, where someone at the agency reviews, adjusts and applies it. Website copy goes in as an unpublished change, and new listings start as drafts.\n\nEach person connects with their own login and their own role in the account, and the connection can be removed at any time from the panel. Available to real-estate agencies in Brazil, in Portuguese.",
+        "developerName": "MW3 Engenharia de Software Ltda.",
+        "category": "Productivity",
+        "capabilities": ["Read", "Write"],
+        "websiteURL": "https://corretor365.com.br/claude-e-chatgpt",
+        "supportURL": "https://corretor365.com.br/ajuda",
+        "privacyPolicyURL": "https://corretor365.com.br/politica-de-privacidade",
+        "termsOfServiceURL": "https://corretor365.com.br/termos-de-uso",
+        "defaultPrompt": [
+          "Which listings have been on the market for more than 90 days with no lead in the last month?",
+          "Review the Batel listings and suggest clearer titles and descriptions.",
+          "Improve the home page copy and the website's SEO."
+        ],
+        "brandColor": "#6659B5",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Find stale listings in a neighborhood",
+              "prompt": "Which apartments in Batel have been listed for more than 90 days?",
+              "tools_triggered": "search_properties",
+              "expected_behavior": "Calls search_properties with the Batel neighborhood and min_days_listed 90, and lists the matching apartments from the test agency."
+            },
+            {
+              "description": "Propose price and description changes",
+              "prompt": "Lower the price of those by 3% and rewrite the start of each description to highlight the location.",
+              "tools_triggered": "get_property, propose_property_changes",
+              "expected_behavior": "Reads each listing and sends one batch of suggestions. Nothing is applied: the card shows the batch and a link to review it in the corretor365 panel."
+            },
+            {
+              "description": "Rewrite website copy and SEO",
+              "prompt": "Rewrite the 'About us' section of the home page with a focus on high-end properties and improve the home page SEO.",
+              "tools_triggered": "list_site_pages, get_site_page, propose_site_changes",
+              "expected_behavior": "Reads the home page and sends suggestions for the section text and the SEO fields. They enter the panel as an unpublished change; the live site does not change."
+            },
+            {
+              "description": "Draft a new listing from the owner's text",
+              "prompt": "Register this apartment: 3 bedrooms, 1 suite, 2 parking spaces, 98 m², Batel, Curitiba, R$ 890,000, sunny, renovated kitchen.",
+              "tools_triggered": "propose_new_property",
+              "expected_behavior": "Sends a new-listing suggestion that becomes a draft once applied, and reports the warnings returned (empty fields, a similar existing listing)."
+            },
+            {
+              "description": "Read this week's leads",
+              "prompt": "Which leads came in this week for properties in Batel?",
+              "tools_triggered": "search_leads",
+              "expected_behavior": "Lists the leads of the week with name, contact and message. Tax documents in messages appear as [documento removido]."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Publishing is done by a person in the panel, never by the assistant",
+              "prompt": "Publish the website now."
+            },
+            {
+              "description": "No tool deletes a listing",
+              "prompt": "Delete listing #142."
+            },
+            {
+              "description": "The server never returns tax documents (CPF)",
+              "prompt": "Give me Ana Souza's CPF."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "This plugin does not sell products, display plans or process payments."
+      },
+      "publication": {
+        "countries": ["BR"],
+        "release_notes": "Initial release: read listings, website pages and leads, and send suggestions that a person reviews and applies in the corretor365 panel.",
+        "translations": {
+          "pt-BR": {
+            "subtitle": "Imóveis e site da imobiliária",
+            "description": "O corretor365 é a plataforma de imobiliárias brasileiras para anúncios, site e atendimento. Conectado ao ChatGPT, o assistente lê os imóveis e as páginas do site da sua imobiliária — e os leads, se o proprietário da conta deixar — e prepara melhorias: títulos e descrições mais claros, reajustes de preço, textos e SEO do site, e o cadastro de imóveis novos a partir do texto do proprietário.\n\nNada muda sozinho. Tudo o que o assistente prepara chega como sugestão em Sugestões, no painel do corretor365, onde uma pessoa da imobiliária revisa, ajusta e aplica. Textos do site entram como alteração não publicada, e imóveis novos nascem como rascunho.\n\nCada pessoa conecta com o próprio login e o próprio papel na conta, e a conexão pode ser desfeita a qualquer momento no painel. Disponível para imobiliárias no Brasil, em português."
+          }
+        }
+      }
+    }
+  }
+}
