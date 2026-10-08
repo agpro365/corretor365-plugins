@@ -8,6 +8,11 @@
     "url": "https://corretor365.com.br"
   },
   "homepage": "https://corretor365.com.br/claude-e-chatgpt",
+  "icon": "./assets/logo.png",
+  "documentationUrl": "https://corretor365.com.br/claude-e-chatgpt",
+  "supportUrl": "https://corretor365.com.br/ajuda",
+  "privacyPolicyUrl": "https://corretor365.com.br/politica-de-privacidade",
+  "termsOfServiceUrl": "https://corretor365.com.br/termos-de-uso",
   "repository": "https://github.com/agpro365/corretor365-plugins",
   "license": "MIT",
   "keywords": ["imobiliária", "imóveis", "corretor de imóveis", "site imobiliário", "real estate", "brasil"]
