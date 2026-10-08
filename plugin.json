@@ -27,7 +27,7 @@
         "termsOfServiceURL": "https://corretor365.com.br/termos-de-uso",
         "defaultPrompt": [
           "Which listings have been on the market for more than 90 days with no lead in the last month?",
-          "Review the Batel listings and suggest clearer titles and descriptions.",
+          "Review my listings and suggest clearer titles and descriptions.",
           "Improve the home page copy and the website's SEO."
         ],
         "brandColor": "#6659B5",
@@ -38,10 +38,10 @@
         "test_cases": {
           "positive": [
             {
-              "description": "Find stale listings in a neighborhood",
-              "prompt": "Which apartments in Batel have been listed for more than 90 days?",
+              "description": "Find stale listings in a city",
+              "prompt": "Which apartments in Brusque have been listed for more than 30 days?",
               "tools_triggered": "search_properties",
-              "expected_behavior": "Calls search_properties with the Batel neighborhood and min_days_listed 90, and lists the matching apartments from the test agency."
+              "expected_behavior": "Calls search_properties with the city Brusque, the apartment type and min_days_listed 30, and lists the matching apartments from the test agency (Vale & Mar Imóveis)."
             },
             {
               "description": "Propose price and description changes",
@@ -51,21 +51,21 @@
             },
             {
               "description": "Rewrite website copy and SEO",
-              "prompt": "Rewrite the 'About us' section of the home page with a focus on high-end properties and improve the home page SEO.",
+              "prompt": "Rewrite the home page headline and subtitle with a focus on high-end properties, and improve the home page SEO.",
               "tools_triggered": "list_site_pages, get_site_page, propose_site_changes",
-              "expected_behavior": "Reads the home page and sends suggestions for the section text and the SEO fields. They enter the panel as an unpublished change; the live site does not change."
+              "expected_behavior": "Reads the home page and sends suggestions for the hero headline and subtitle and the SEO title and description. They enter the panel as an unpublished change; the live site does not change."
             },
             {
               "description": "Draft a new listing from the owner's text",
-              "prompt": "Register this apartment: 3 bedrooms, 1 suite, 2 parking spaces, 98 m², Batel, Curitiba, R$ 890,000, sunny, renovated kitchen.",
+              "prompt": "Register this apartment: 3 bedrooms, 1 suite, 2 parking spaces, 98 m², Centro, Brusque, R$ 690,000, sunny, renovated kitchen.",
               "tools_triggered": "propose_new_property",
-              "expected_behavior": "Sends a new-listing suggestion that becomes a draft once applied, and reports the warnings returned (empty fields, a similar existing listing)."
+              "expected_behavior": "Sends a new-listing suggestion that becomes a draft once applied, and reports the warnings returned: empty fields, and a similar existing listing (the Residencial Mirante do Vale, also in Centro, Brusque)."
             },
             {
-              "description": "Read this week's leads",
-              "prompt": "Which leads came in this week for properties in Batel?",
+              "description": "Read recent leads",
+              "prompt": "Show me the leads from the last 90 days.",
               "tools_triggered": "search_leads",
-              "expected_behavior": "Lists the leads of the week with name, contact and message. Tax documents in messages appear as [documento removido]."
+              "expected_behavior": "Calls search_leads with since_days 90 and lists the leads with name, source, stage and when they arrived — never phone or e-mail in the list. Tax documents in messages appear as [documento removido]."
             }
           ],
           "negative": [
@@ -75,11 +75,11 @@
             },
             {
               "description": "No tool deletes a listing",
-              "prompt": "Delete listing #142."
+              "prompt": "Delete listing #6."
             },
             {
               "description": "The server never returns tax documents (CPF)",
-              "prompt": "Give me Ana Souza's CPF."
+              "prompt": "Give me the CPF of the most recent lead."
             }
           ]
         },
