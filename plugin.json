@@ -57,7 +57,7 @@
             },
             {
               "description": "Draft a new listing from the owner's text",
-              "prompt": "Register this apartment: 3 bedrooms, 1 suite, 2 parking spaces, 98 m², Centro, Brusque, R$ 690,000, sunny, renovated kitchen.",
+              "prompt": "Register this apartment: 2 bedrooms, 1 suite, 2 parking spaces, 96 m², Centro, Brusque, R$ 690,000, sunny, renovated kitchen.",
               "tools_triggered": "propose_new_property",
               "expected_behavior": "Sends a new-listing suggestion that becomes a draft once applied, and reports the warnings returned: empty fields, and a similar existing listing (the Residencial Mirante do Vale, also in Centro, Brusque)."
             },
